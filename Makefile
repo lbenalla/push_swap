@@ -12,11 +12,11 @@
 
 NAME = push_swap
 
-SRC = push_swap.c
+SRC = push_swap.c action.c exit_free_malloc.c validation.c 
 
-OBJSFD  = temporary
+OBJFD  = temporary
 
-OBJ = $(addprefix $(OBJSFD)/,$(SRC:.c=.o))
+OBJ = $(addprefix $(OBJFD)/,$(SRC:.c=.o))
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -24,21 +24,21 @@ RM = rm -rf
 
 all: $(NAME)
 
-$(OBJSFD):
+$(OBJFD):
 	mkdir $@
 
-$(OBJSFD)/%.o: %.c | $(OBJSFD)
-	gcc -g $(CFLAGS)  -c $< -o $@
+$(OBJFD)/%.o: %.c | $(OBJFD)
+	gcc -g $(FLAGS)  -c $< -o $@ 
 
-$(NAME1): $(OBJS1)
-	gcc -g $(OBJS1) $(LIB_BINARY) -o $@
+$(NAME): $(OBJ)
+	gcc -g $(OBJ)  -o $@ 
 
 clean:
 	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) $(OBJSFD)
+	$(RM) $(OBJFD)
 
 re: fclean all
 
